@@ -10,8 +10,9 @@ const loader = document.querySelector(".loader");
 const error = document.querySelector(".error");
 
 loader.classList.remove('is-hidden');
-selectCat.classList.add('is-hidden');
+// selectCat.classList.add('is-hidden');
 error.classList.add('is-hidden');
+let currentBreedId = null;
 
 fetchBreeds()
   .then(data => {
@@ -22,36 +23,40 @@ fetchBreeds()
       select: selectCat
     });
 
+  loader.classList.remove('is-hidden');
+    selectCat.addEventListener("change", () => {
+      const selectedBreedId = selectCat.value;
+      error.style.display = "none";
+
+      // Очищення старої інформації перед завантаженням нової породи
+      catInfo.innerHTML = "";
+      loader.style.display = "block";
+
+      fetchCatByBreed(selectedBreedId)
+        .then(catData => {
+          loader.style.display = "none";
+
+          if (catData.length === 0) {
+            Notiflix.Notify.Warning('Немає результатів для цієї породи кота.');
+            return;
+          }
+
+          renderMarkupInfo(catData[0]);
+        })
+        .catch(error => {
+          console.error("Помилка отримання інформації про кота:", error);
+          Notiflix.Notify.Failure('Помилка отримання інформації про кота');
+          error.style.display = "block";
+        });
+    });
     loader.classList.add('is-hidden');
-    selectCat.classList.remove('is-hidden');
   })
   .catch(error => {
     console.error("Помилка отримання списку порід:", error);
     Notiflix.Notify.Failure('Помилка отримання списку порід');
   });
 
-selectCat.addEventListener("change", () => {
-  const selectedBreedId = selectCat.value;
-  loader.style.display = "block";
-  error.style.display = "none";
 
-  fetchCatByBreed(selectedBreedId)
-    .then(catData => {
-      loader.style.display = "none";
-
-      if (catData.length === 0) {
-        Notiflix.Notify.Warning('Немає результатів для цієї породи кота.');
-        return;
-      }
-
-      renderMarkupInfo(catData[0]);
-    })
-    .catch(error => {
-      console.error("Помилка отримання інформації про кота:", error);
-      Notiflix.Notify.Failure('Помилка отримання інформації про кота');
-      error.style.display = "block";
-    });
-});
 
 function renderMarkupInfo(data) {
   const { breeds, url } = data;
