@@ -1,49 +1,31 @@
-/* Стилі для завантажувача */
-.loader {
-    display: none;
-    text-align: center;
-    margin-top: 20px;
-}
-
-/* Стилі для повідомлення про помилку */
-.error {
-    display: none;
-    color: red;
-    text-align: center;
-    margin-top: 20px;
-}
-
-/* Стилі для блоку інформації про кота */
-.cat-info {
-    display: none;
-    text-align: center;
-    margin-top: 20px;
-    padding: 20px;
+body {
     background-color: #f7f7f7;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    /* border-radius: 5px; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    font-family: fantasy;
+}
+.is-hidden {
+    display: none;
+}
+.loader {
+    margin-top: 20px;
+}
+.error {
+    color: red;
+    margin-top: 20px;
+}
+.cat-info {
+    display: flex;
+    gap: 20px;
+}
+.img-cat {
+    width: 600px;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-
-.cat-image {
-    max-width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 10px;
+.description {
+    margin: auto;
 }
-
-.cat-name {
-    font-size: 24px;
-    margin-top: 10px;
-}
-
-.cat-description {
-    font-size: 16px;
-    margin-top: 10px;
-}
-
-.cat-temperament {
-    font-size: 16px;
-    margin-top: 10px;
-}
-
