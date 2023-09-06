@@ -37,7 +37,7 @@ fetchBreeds()
           loader.style.display = "none";
 
           if (catData.length === 0) {
-            Notiflix.Notify.Warning('Немає результатів для цієї породи кота.');
+            Notiflix.Notify.warning('Немає результатів для цієї породи кота.');
             return;
           }
 
@@ -45,7 +45,7 @@ fetchBreeds()
         })
         .catch(error => {
           console.error("Помилка отримання інформації про кота:", error);
-          Notiflix.Notify.Failure('Помилка отримання інформації про кота');
+          Notiflix.Notify.failure('Помилка отримання інформації про кота');
           error.style.display = "block";
         });
     });
@@ -53,10 +53,8 @@ fetchBreeds()
   })
   .catch(error => {
     console.error("Помилка отримання списку порід:", error);
-    Notiflix.Notify.Failure('Помилка отримання списку порід');
+    Notiflix.Notify.failure('Помилка отримання списку порід');
   });
-
-
 
 function renderMarkupInfo(data) {
   const { breeds, url } = data;
